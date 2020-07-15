@@ -44,8 +44,8 @@ function mode() {
   echo "LOCALIPV4=${LOCALIPV4}" >> /network
 
   # Set local IP
-  sed -i 's|{{LOCALIPV4}}|'"${LOCALIPV4}"'|g' /etc/clamd.conf
-  sed -i 's|{{PUBLICIPV4}}|'"${PUBLICIPV4}"'|g' /etc/clamd.conf
+  #sed -i 's|{{LOCALIPV4}}|'"${LOCALIPV4}"'|g' /etc/clamd.conf
+  #sed -i 's|{{PUBLICIPV4}}|'"${PUBLICIPV4}"'|g' /etc/clamd.conf
 
 }
 
@@ -92,8 +92,8 @@ function monit() {
     echo 'include /etc/monit.d/*'
   } | tee /etc/monitrc
 
-  find /etc/monit.d -maxdepth 5 -type f -exec sed -i -e 's|{{LOCALIPV4}}|'"${LOCALIPV4}"'|g' {} \;
-  find /etc/monit.d -maxdepth 5 -type f -exec sed -i -e 's|{{PUBLICIPV4}}|'"${PUBLICIPV4}"'|g' {} \;
+  #find /etc/monit.d -maxdepth 5 -type f -exec sed -i -e 's|{{LOCALIPV4}}|'"${LOCALIPV4}"'|g' {} \;
+  #find /etc/monit.d -maxdepth 5 -type f -exec sed -i -e 's|{{PUBLICIPV4}}|'"${PUBLICIPV4}"'|g' {} \;
 
   chmod 700 /etc/monitrc
   run="monit -c /etc/monitrc" && bash -c "${run}"
