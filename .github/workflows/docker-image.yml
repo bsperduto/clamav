@@ -1,0 +1,25 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag clamav:$(date +%s)
+    - name: GithubPackages-Docker
+      uses: Kolkies/githubpackages-docker@v1.0.4
+      with:
+        # Access token which is used to deploy the image to the repository. I advise to use GITHUB_TOKEN
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        # Name for the docker image
+        image-name: clamav
