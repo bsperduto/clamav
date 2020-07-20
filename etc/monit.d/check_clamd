@@ -11,7 +11,7 @@ check program clamd-scan-check with path "/bin/bash -c '/tests/test_virus.sh'"
     stop program = "/bin/bash -c '/usr/bin/clam stop'"
     if status != 0 for 2 cycles then stop
 
-check host clamd-server-port with address {{PUBLICIPV4}}
+check host clamd-server-port with address 127.0.0.1
     start program = "/bin/bash -c '/usr/bin/clam start'" with timeout 60 seconds
     stop program = "/bin/bash -c '/usr/bin/clam stop'"
     if failed port 3310 for 3 cycles then restart
